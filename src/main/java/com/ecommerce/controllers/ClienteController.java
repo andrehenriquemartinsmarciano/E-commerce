@@ -1,4 +1,4 @@
-package com.ecommerce.controller;
+package com.ecommerce.controllers;
 
 public class ClienteController {
 
