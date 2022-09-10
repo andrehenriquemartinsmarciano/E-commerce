@@ -1,19 +1,18 @@
 package com.ecommerce.models;
 
-public class SocioMajoritario {
-	private int id_socio_majoritario;
+public class SocioAssistente {
+	private int id_socio;
 	private String nome;
 	private String email;
-	private String cpf;
 	private int telefone;
 	private String endereco;
 
-	public int getId_socio_majoritario() {
-		return id_socio_majoritario;
+	public int getId_socio() {
+		return id_socio;
 	}
 
-	public void setId_socio_majoritario(int id_socio_majoritario) {
-		this.id_socio_majoritario = id_socio_majoritario;
+	public void setId_socio(int id_socio) {
+		this.id_socio = id_socio;
 	}
 
 	public String getNome() {
@@ -30,14 +29,6 @@ public class SocioMajoritario {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public int getTelefone() {
