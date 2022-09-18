@@ -42,7 +42,7 @@ public class SocioAssistente {
 		EntityManager entityManager = getEntityManager();
 		try {
 
-			SocioMajoritario socioAssistente = consultarPorId(id);;
+			SocioAssistente socioAssistente = consultarPorId(id);
 			System.out.println("Excluindo a pessoa: " + socioAssistente.getEntityManager());
 			entityManager.remove(socioAssistente);
 			entityManager.getTransaction().commit();
@@ -51,11 +51,11 @@ public class SocioAssistente {
 		}
 	}
 
-	public SocioMajoritario consultarPorId(Long id) {
+	public SocioAssistente consultarPorId(Long id) {
 		EntityManager entityManager = getEntityManager();
-		SocioMajoritario socioAssistente = null;
+		SocioAssistente socioAssistente = null;
 		try {
-			socioAssistente= entityManager.find(SocioMajoritario.class, id);
+			socioAssistente= entityManager.find(SocioAssistente.class, id);
 		} finally {
 			entityManager.close();
 		}
