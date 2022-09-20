@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
+  <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <persistence-unit name="org.hibernate.tutorial.jpa" transaction-type="RESOURCE_LOCAL">
-        <description>
-            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
-        </description>
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>org.halyph.sessiondemo.Event</class>
+    <context:annotation-config/>
 
-        <properties> 
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpatestdb" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="root" />
+      <context:component-scan base-package="br.com.devmedia.springdata"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-        </properties>
+      <!-- Indica onde se encontram as interfaces que estendem JpaRepository -->
+      <jpa:repositories base-package="br.com.devmedia.springdata.repository"/>
 
-    </persistence-unit>
+      <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.
+         LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+          <bean class="org.springframework.orm.jpa.vendor
+          .HibernateJpaVendorAdapter">
+            <property name="showSql" value="true"/>
+            <property name="generateDdl" value="true"/>
+          </bean>
+        </property>
+        <property name="persistenceUnitName" value="persistenceUnitName"/>
+      </bean>
 
-</persistence>
+      <bean id="transactionManager"
+      class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="jpaDialect">
+          <bean
+          class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+      </bean>
+
+      <bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/spring-data-jpa"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+      </bean>
+  </beans>

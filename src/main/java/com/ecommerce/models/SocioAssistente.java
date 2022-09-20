@@ -1,11 +1,17 @@
 package com.ecommerce.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-public class SocioAssistente {
+import javax.persistence.Table;
+@Entity
+@Table(name = "SocioAssistente")
+public class SocioAssistente implements Serializable{
+	 private static final long serialVersionUID = -2420346134960559062L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_socio_assistente;
@@ -55,6 +61,7 @@ public class SocioAssistente {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
 	
 	
 
